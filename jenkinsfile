@@ -19,10 +19,12 @@ pipeline{
             stage('Quality Gate Status'){
                 
                 steps{
+                 withSonarQubeEnv(credentialsId: 'sonar-api') {
                     
                     script{
                         
                         waitForQualityGate abortPipeline: false, credentialsId: 'sonar-api'
+                    }
                     }
                 }
             }
